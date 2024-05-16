@@ -1,6 +1,6 @@
 {
   "profiles": {
-    "UserManagementService": {
+    "AssigneTaskServices": {
       "commandName": "Project",
       "launchBrowser": true,
       "launchUrl": "swagger",
@@ -8,7 +8,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
       "dotnetRunMessages": true,
-      "applicationUrl": "https://localhost:7226;http://localhost:5006"
+      "applicationUrl": "https://localhost:7000;http://localhost:5043"
     },
     "IIS Express": {
       "commandName": "IISExpress",
@@ -31,8 +31,8 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "http://localhost:25587",
-      "sslPort": 44336
+      "applicationUrl": "http://localhost:26205",
+      "sslPort": 44317
     }
   }
 }

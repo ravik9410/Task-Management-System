@@ -1,6 +1,6 @@
-using Mango.Services.CouponAPI.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using UserManagementService.Data;
 using UserManagementService.Extensions;
 using UserManagementService.Models;
 

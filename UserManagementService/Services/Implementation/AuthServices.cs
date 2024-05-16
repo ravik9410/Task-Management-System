@@ -1,7 +1,7 @@
-﻿using Mango.Services.CouponAPI.Data;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using UserManagementService.Data;
 using UserManagementService.Models;
 using UserManagementService.Models.DTO;
 using UserManagementService.Services.Contract;

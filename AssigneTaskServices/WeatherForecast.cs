@@ -1,4 +1,4 @@
-namespace UserManagementService
+namespace AssigneTaskServices
 {
     public class WeatherForecast
     {

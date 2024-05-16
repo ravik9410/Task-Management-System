@@ -1,16 +1,16 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿
 using Microsoft.EntityFrameworkCore;
-using UserManagementService.Models;
+using TaskCreationService.Models;
 
-namespace UserManagementService.Data
+namespace TaskCreationService.Data
 {
-    public class AppDbContext : IdentityDbContext<ApplicationUser>
+    public class AppDbContext : DbContext
     {
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
 
         }
-        public DbSet<ApplicationUser> ApplicationUsers { get; set; }
+        public DbSet<UserTask> UserTasks { get; set; }
        /* protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);            

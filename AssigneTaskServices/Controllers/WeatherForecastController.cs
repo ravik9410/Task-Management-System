@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace UserManagementService.Controllers
+namespace AssigneTaskServices.Controllers
 {
     [ApiController]
     [Route("[controller]")]

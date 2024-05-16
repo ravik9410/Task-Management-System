@@ -46,7 +46,7 @@ namespace UserManagementService.Controllers
         public async Task<ResponseDto> GetById(string userId)
         {
             var user = await _userServices.GetUserByIdAsync(userId);
-            if (user != null)
+            if (user.UserId != null)
             {
                 return new()
                 {
