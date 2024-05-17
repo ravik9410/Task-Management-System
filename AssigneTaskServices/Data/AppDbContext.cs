@@ -11,9 +11,9 @@ namespace AssigneTaskServices.Data
 
         }
         public DbSet<AssignedUserTask> AssignedTasks { get; set; }
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        /*protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-        }
+        }*/
     }
 }

@@ -1,4 +1,4 @@
-namespace AssigneTaskServices
+namespace NotificationServices
 {
     public class WeatherForecast
     {

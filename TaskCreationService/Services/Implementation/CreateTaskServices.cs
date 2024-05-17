@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 using TaskCreationService.Data;
 using TaskCreationService.Models;
 using TaskCreationService.Models.DTO;
@@ -33,6 +35,28 @@ namespace TaskCreationService.Services.Implementation
             {
                 return "User not exist.";
             }
+        }
+
+        public async Task<List<UserTaskDto>> GetTask()
+        {
+            var data = await _appDbContext.UserTasks.ToListAsync();
+            var result = _mapper.Map<List<UserTaskDto>>(data);
+            return result;
+        }
+
+        public async Task<UserTaskDto> GetTaskById(int taskId)
+        {
+            var data = await _appDbContext.UserTasks.FirstOrDefaultAsync(m => m.TaskId == taskId);
+            var result = _mapper.Map<UserTaskDto>(data);
+            return result;
+            //throw new NotImplementedException();
+        }
+        public List<UserTaskDto> GetTaskByUserId(string userId)
+        {
+            var data = _appDbContext.UserTasks.Where(m => m.UserId == userId).ToList();
+            var result = _mapper.Map<List<UserTaskDto>>(data);
+            return result;
+            //throw new NotImplementedException();
         }
     }
 }
