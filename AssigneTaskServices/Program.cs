@@ -1,6 +1,8 @@
 using AssigneTaskServices;
 using AssigneTaskServices.Data;
 using AssigneTaskServices.Extension;
+using AssigneTaskServices.Repository;
+using AssigneTaskServices.Services;
 using AssigneTaskServices.Services.Contract;
 using AssigneTaskServices.Services.Implementation;
 using AssigneTaskServices.Utility;
@@ -15,8 +17,9 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddScoped<IAssignTask,AssignTaskService>();
+builder.Services.AddScoped<IAssignTask, AssignTaskService>();
 builder.Services.AddScoped<IUserTaskServices, UserTaskService>();
+builder.Services.AddScoped(typeof(IRabbitMQRepository<>), typeof(RabbitMQRepository<>));
 builder.Services.AddAuthentication();
 builder.Services.AddHttpContextAccessor();
 IMapper mapper = MappingConfig.RegisterConfig().CreateMapper();

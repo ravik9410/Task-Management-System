@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 
 namespace NotificationServices.Repository
 {
-	public interface IRabbitMQRepository<T>
+	public interface IRabbitMQRepository
 	{
-		Task<int> SendAsync(T request);
-	}
+		Task<int> ReceiveAsync();
+		Task SendMail(object value);
+
+    }
 }
