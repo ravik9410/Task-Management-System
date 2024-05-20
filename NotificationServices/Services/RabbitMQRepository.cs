@@ -27,25 +27,8 @@ namespace NotificationServices.Services
             };
             channel.BasicConsume("demo-queue", true, consumer);
             Console.ReadLine();
-
-
-
-            /*
-
-                        var factory = new ConnectionFactory()
-                            {
-                                HostName = "localhost",
-                                //Uri = new Uri("amqp://guest:guest@localhost:15672/")
-                            };
-                        using var connnection = factory.CreateConnection();
-                        var channel = connnection.CreateModel();
-                        channel.QueueDeclare("demo-queue", durable: false, exclusive: false, autoDelete: false, arguments: null);
-                        var message = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(request));
-                        channel.BasicPublish("", "demo-queue", null, message);
-                        int result = 1;*/
             int result = 1;
             return result;
-            // throw new NotImplementedException();
         }
 
         public async Task SendMail(object value)

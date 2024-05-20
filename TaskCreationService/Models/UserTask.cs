@@ -12,8 +12,6 @@ namespace TaskCreationService.Models
         public DateTime CreatedDate { get; set; }
         public DateTime LastUpdatedDate { get; set; }
         [Required]
-        public string UserId { get; set; }
-        public string TaskStatus { get; set; }
         public string TaskAssignedBy { get; set; }
     }
 }
