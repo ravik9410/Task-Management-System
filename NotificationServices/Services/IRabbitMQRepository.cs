@@ -9,7 +9,7 @@ namespace NotificationServices.Repository
 	public interface IRabbitMQRepository
 	{
 		Task<int> ReceiveAsync();
-		Task SendMail(object value);
+		Task SendMail(object value, string email);
 
     }
 }

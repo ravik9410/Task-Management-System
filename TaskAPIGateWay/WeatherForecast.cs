@@ -1,4 +1,4 @@
-namespace NotificationServices
+namespace TaskAPIGateWay
 {
     public class WeatherForecast
     {

@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using TaskCreationService.Data;
 using TaskCreationService.Models;
 using TaskCreationService.Models.DTO;
@@ -36,6 +37,22 @@ namespace TaskCreationService.Services.Implementation
                 return "User not exist.";
             }
         }
+        public async Task<string> UpdateTask(UserTaskDto task)
+        {
+            var data = await _appDbContext.UserTasks.FirstOrDefaultAsync(m => m.TaskId == task.TaskId);
+            //var data = await _userDetails.GetById(task.UserId);
+            if (data!.TaskId != 0)
+            {
+                data.TaskStatus = task.TaskStatus;
+                data.TaskAssignedBy = task.TaskAssignedBy;
+                await _appDbContext.SaveChangesAsync();
+                return "Task saved successfully.";
+            }
+            else
+            {
+                return "Task not exist.";
+            }
+        }
 
         public async Task<List<UserTaskDto>> GetTask()
         {
@@ -54,6 +71,13 @@ namespace TaskCreationService.Services.Implementation
         public List<UserTaskDto> GetTaskByUserId(string userId)
         {
             var data = _appDbContext.UserTasks.Where(m => m.UserId == userId).ToList();
+            var result = _mapper.Map<List<UserTaskDto>>(data);
+            return result;
+            //throw new NotImplementedException();
+        }
+        public List<UserTaskDto> GetTaskByStatus(string status)
+        {
+            var data = _appDbContext.UserTasks.Where(m => m.TaskStatus == status).ToList();
             var result = _mapper.Map<List<UserTaskDto>>(data);
             return result;
             //throw new NotImplementedException();

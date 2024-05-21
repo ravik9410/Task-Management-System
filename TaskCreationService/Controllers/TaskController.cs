@@ -35,6 +35,22 @@ namespace TaskCreationService.Controllers
             _responseDto.Result = string.Empty;
             return BadRequest(result);
         }
+        [HttpPatch]
+        public async Task<IActionResult> Patch([FromBody] UserTaskDto task)
+        {
+            var result = await _createTask.UpdateTask(task);
+            if (result == "Task saved successfully.")
+            {
+                _responseDto.IsSuccess = true;
+                _responseDto.Result = result;
+                _responseDto.Message = string.Empty;
+                return Ok(_responseDto);
+            }
+            _responseDto.IsSuccess = false;
+            _responseDto.Message = result;
+            _responseDto.Result = string.Empty;
+            return BadRequest(result);
+        }
 
         [HttpGet]
         public async Task<IActionResult> GetTaskList()
@@ -73,6 +89,22 @@ namespace TaskCreationService.Controllers
         public IActionResult GetTaskByUserId(string userId)
         {
             var result = _createTask.GetTaskByUserId(userId);
+            if (result.Count > 0)
+            {
+                _responseDto.IsSuccess = true;
+                _responseDto.Result = result;
+                _responseDto.Message = string.Empty;
+                return Ok(result);
+            }
+            _responseDto.IsSuccess = true;
+            _responseDto.Message = "no record";
+            _responseDto.Result = string.Empty;
+            return BadRequest(result);
+        }   
+        [HttpGet("GetTaskByStatus/{status}")]
+        public IActionResult GetTaskByStatusId(string status)
+        {
+            var result = _createTask.GetTaskByStatus(status);
             if (result.Count > 0)
             {
                 _responseDto.IsSuccess = true;
