@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+using System.Data;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
@@ -25,6 +26,7 @@ namespace UserManagementService.Services.Implementation
                 new Claim(JwtRegisteredClaimNames.Email,User.Email),
                 new Claim(JwtRegisteredClaimNames.Sub,User.Id),
                 new Claim(JwtRegisteredClaimNames.Name,User.UserName),
+                new Claim("role",roles.FirstOrDefault()?.ToUpper()),
                 //new claim("Platform","IOS"),
             };
             claims.AddRange(roles.Select(role => new Claim(ClaimTypes.Role, role.ToUpper())));

@@ -40,6 +40,7 @@ namespace TaskCreationService.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("TaskAssignedBy")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("TaskStatus")
@@ -50,7 +51,6 @@ namespace TaskCreationService.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserId")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("TaskId");

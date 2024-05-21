@@ -1,0 +1,98 @@
+﻿@model List<TaskManagementApp.Models.DTO.UserTaskDto>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+<div class="card shadow border-0 mt-4">
+    <div class="card-header bg-secondary bg-gradient ml-0 py-3">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h1 class="text-white">Task Details</h1>
+            </div>
+        </div>
+    </div>
+    <div class="card-body p-4">
+        <div class="row pb-3">
+            <div class="col-6">
+            </div>
+            <div class="col-6 text-end">
+                <a class="btn btn-outline-primary" asp-action="CreateNewTask" asp-controller="Task"><i class="bi bi-plus-square"></i>Create New Task</a>
+
+            </div>
+        </div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        Title
+                    </th>
+                    <th>
+                        Description
+                    </th>
+
+
+                    <th>
+                        Assigned To
+                    </th>
+                    <th>
+                        Assigned By
+                    </th>
+                    <th>
+                        Status
+                    </th>
+                    <th>
+                        Updated Datetime
+                    </th>
+
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @item.Title
+                        </td>
+                        <td>
+                            @item.Description
+                        </td>
+
+                        <td>
+                            @item.UserName
+                        </td>
+                        <td>
+                            @item.AssignedByName
+                        </td>
+                        <td>
+                            @item.TaskStatus
+                        </td>
+                        <td>
+                            @item.LastUpdatedDate
+                        </td>
+                        <td>
+                            @if (item.TaskStatus != "Deleted")
+                            {
+                                <a asp-action="EditTask" asp-route-taskId="@item.TaskId" class="btn btn-warning">
+                                    @*<i class="fas fa-edit"></i>*@Edit
+                                </a>
+
+                                <a asp-action="DeleteTask" asp-route-taskId="@item.TaskId" class="btn btn-danger">
+                                    @*<i class="bi bi-trash"></i>*@Delete
+                                </a>
+
+                                @if (item.TaskStatus != "Assigned")
+                                {
+                                    <a asp-action="GetTaskById" asp-controller="Task" asp-route-taskId="@item.TaskId" class="btn btn-success">
+                                        @*<i class="bi bi-trash"></i>*@Assigned
+                                    </a>
+                                }
+                            }
+                        </td>
+                    </tr>
+                }
+
+
+            </tbody>
+        </table>
+
+    </div>
+
+</div>

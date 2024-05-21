@@ -42,6 +42,7 @@ namespace UserManagementService.Controllers
                 _responseDto.IsSuccess = false;
                 return BadRequest(_responseDto);
             }
+            _responseDto.Result = result;
             return Ok(_responseDto);
         }
         [HttpPost("AssignRole")]
@@ -55,6 +56,29 @@ namespace UserManagementService.Controllers
                 return BadRequest(_responseDto);
             }
             return Ok(_responseDto);
+        }
+        [HttpGet("{userId}")]
+        public async Task<ResponseDto> GetById(string userId)
+        {
+            var user = await _authServices.GetUserByIdAsync(userId);
+            if (user.UserId != null)
+            {
+                return new()
+                {
+                    Result = user,
+                    IsSuccess = true,
+                    Message = string.Empty
+                };
+            }
+            else
+            {
+                return new()
+                {
+                    Result = "No user found with id = " + userId,
+                    Message = "No user found with id = " + userId,
+                    IsSuccess = false
+                };
+            }
         }
     }
 }

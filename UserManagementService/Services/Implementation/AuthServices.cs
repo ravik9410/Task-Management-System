@@ -116,5 +116,24 @@ namespace UserManagementService.Services.Implementation
                 return ex.ToString();
             }
         }
+        public async Task<UserDto> GetUserByIdAsync(string userId)
+        {
+            if (!string.IsNullOrEmpty(userId))
+            {
+                var user = await _appDbContext.ApplicationUsers.AsNoTracking().FirstOrDefaultAsync(m => m.Id == userId);
+                if (user != null)
+                {
+                    UserDto userDto = new UserDto()
+                    {
+                        UserId = userId,
+                        Email = user.Email,
+                        Name = user.Name,
+                        PhoneNumber = user.PhoneNumber,
+                    };
+                    return userDto;
+                }
+            }
+            return new();
+        }
     }
 }

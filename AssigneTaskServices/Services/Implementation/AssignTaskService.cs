@@ -26,19 +26,20 @@ namespace AssigneTaskServices.Services.Implementation
             try
             {
                 //check the task is created first.
-                var task = await _taskServices.GetTaskById(assignedUserTask.TaskId);
+                var task = await _taskServices.GetTaskById(assignedUserTask.TaskId ?? 0);
                 if (task.TaskId > 0)
                 {
+                    var assignTaskDetails = await _appDbContext.AssignedTasks.FirstOrDefaultAsync(m => m.TaskId == task.TaskId && m.UserId == task.UserId);
                     var assign = _mapper.Map<AssignedUserTask>(assignedUserTask);
-                    if (assign.AssignedId == 0)
+                    if (assign.AssignedId == 0 && assignTaskDetails == null)
                     {
-                        assign.TaskStatus = "Created";
+                        assign.TaskStatus = "Assigned";
                         await _appDbContext.AddAsync(assign);
                         // return await _appDbContext.SaveChangesAsync() == 1 ? true : false;
                     }
                     else
                     {
-                        assign.TaskStatus = "Updated";
+                        assign.TaskStatus = "Assigned";
                         _appDbContext.Update(assign);
 
                     }
@@ -55,8 +56,8 @@ namespace AssigneTaskServices.Services.Implementation
         }
         public async Task<bool> DeleteTask(int assignId)
         {
-            var assignData = await _appDbContext.AssignedTasks.FirstOrDefaultAsync(m => m.AssignedId == assignId);
-            if (assignData?.AssignedId != 0)
+            var assignData = await _appDbContext.AssignedTasks.FirstOrDefaultAsync(m => m.TaskId == assignId);
+            if (assignData?.AssignedId != 0 && assignData?.AssignedId != null)
             {
 
                 _appDbContext.AssignedTasks.Remove(assignData!);
@@ -64,7 +65,18 @@ namespace AssigneTaskServices.Services.Implementation
                 assignData.TaskStatus = "Deleted";
                 _rabbitMQRepository.SendAsync(assignData);
                 return result;
-
+            }
+            else
+            {
+                var task = await _taskServices.GetTaskById(assignId);
+                AssignedUserTask assignDto = new AssignedUserTask();
+                assignDto.TaskStatus = "Deleted";
+                assignDto.TaskId = task.TaskId;
+                assignDto.UserId = task.UserId;
+                assignDto.TaskAssignedBy = task.TaskAssignedBy;
+                //task.TaskStatus = "Deleted";
+                _rabbitMQRepository.SendAsync(assignDto);
+                return true;
             }
             return false;
         }

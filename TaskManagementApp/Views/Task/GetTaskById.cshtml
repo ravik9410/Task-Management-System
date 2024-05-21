@@ -1,0 +1,52 @@
+﻿@model TaskManagementApp.Models.DTO.UserTaskDto
+
+<div class="container">
+    <div class="row justify-content-center mt-5">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h4>Create New Task</h4>
+                </div>
+                <div class="card-body">
+                    <div class="row text-center">
+                        <div asp-validation-summary="All" class="text-danger"></div>
+                    </div>
+                    <form asp-action="AssignedTasktoUser" method="post">
+                        <input type="hidden" asp-for="TaskId" />
+                        <div class="row pb-2 w-75">
+                            <div class="form-group">
+                                <label for="Name">Title</label>
+                                <input disabled type="text" asp-for="Title" class="form-control" placeholder="Enter Title">
+                            </div>
+                            <span asp-validation-for="Title" class="text-danger"></span>
+                        </div>
+
+                        <div class="row pb-2 w-75">
+                            <div class="form-group">
+                                <label for="Description">Description</label>
+                                <input disabled type="text" asp-for="Description" class="form-control" placeholder="Enter Description">
+                            </div>
+                            <span asp-validation-for="Description" class="text-danger"></span>
+                        </div>
+                        <div class="row pb-2 w-75">
+                            <div class="form-group">
+                                <select asp-for="UserId" class="form-select" asp-items="@ViewBag.UserList">
+                                    <option disabled selected> --Select User--</option>
+                                </select>
+                                @*<label for="PhoneNumber">Select User</label>
+                                <input type="text" asp-for="UserId" class="form-control" placeholder="Select User">*@
+                            </div>
+                            <span asp-validation-for="UserId" class="text-danger"></span>
+                        </div>
+                        <div class="row pb-2 w-25 m-2 align-content-center">
+                            <button type="submit" class="btn btn-success">Assign Task</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -1,0 +1,49 @@
+﻿@model TaskManagementApp.Models.DTO.UserDto
+
+<div class="container">
+    <div class="row justify-content-center mt-5">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h4>Modify User Details</h4>
+                </div>                
+                <div class="card-body">
+                    <div class="row text-center">
+                        <div asp-validation-summary="All" class="text-danger"></div>
+                    </div>
+                    <form asp-action="EditUser" method="post">
+                        <input type="hidden" asp-for="UserId" />
+                        <div class="row pb-2 w-75">
+                            <div class="form-group">
+                                <label for="Name">Name</label>
+                                <input type="text" asp-for="Name" class="form-control" placeholder="Name">
+                            </div>
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                        </div>
+
+                        <div class="row pb-2 w-75">
+                            <div class="form-group">
+                                <label for="email">Email address</label>
+                                <input type="email" asp-for="Email" class="form-control" placeholder="Enter email">
+                            </div>
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+                        <div class="row pb-2 w-75">
+                            <div class="form-group">
+                                <label for="PhoneNumber">Phone Number</label>
+                                <input type="text" asp-for="PhoneNumber" class="form-control" placeholder="Phone Number">
+                            </div>
+                            <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                        </div>                     
+                        <div class="row pb-2 w-25 m-2 align-content-center">
+                            <button type="submit" class="btn btn-success">Update</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+}

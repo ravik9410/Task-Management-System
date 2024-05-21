@@ -18,13 +18,16 @@ namespace AssigneTaskServices.Services.Implementation
             try
             {
                 var client = _httpClient.CreateClient("GetTaskById");
-                var data = await client.GetAsync("/task?taskId=" + taskId);
-                var content = await data.Content.ReadAsStringAsync();
-                var response = JsonConvert.DeserializeObject<ResponseDto>(content) ?? new();
-                if (response.IsSuccess)
+                var data = await client.GetAsync("/api/task/" + taskId);
+                if (data.IsSuccessStatusCode)
                 {
-                    var taskDto = JsonConvert.DeserializeObject<UserTaskDto>(response.Result?.ToString()!);
-                    return taskDto!;
+                    var content = await data.Content.ReadAsStringAsync();
+                    var response = JsonConvert.DeserializeObject<ResponseDto>(content) ?? new();
+                    if (response.IsSuccess)
+                    {
+                        var taskDto = JsonConvert.DeserializeObject<UserTaskDto>(response.Result?.ToString()!);
+                        return taskDto!;
+                    }
                 }
                 return new();
             }
