@@ -60,7 +60,25 @@ namespace TaskManagementApp.Service.Implementation
             });
             if (result!.IsSuccess)
             {
-                return JsonConvert.DeserializeObject<string>(result.Result?.ToString()!)!;
+                var results = await _baseService.SendAsync(new()
+                {
+                    ApiType = ApiType.POST,
+                    Url = AuthUrl + "/api/auth/AssignRole",
+                    Data = register
+                });
+                if (results!.IsSuccess)
+                {
+                    //var response= results.Result?.ToString()!;
+
+                    return result.Result?.ToString()?.Trim()!;
+
+                }
+                else
+                {
+                    return result.Message!;
+                }
+                return result.Message!;
+                //return JsonConvert.DeserializeObject<string>(result.Result?.ToString()!)!;
 
             }
             else

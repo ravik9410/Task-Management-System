@@ -32,31 +32,44 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
-                        @if (User.IsInRole(StaticData.RoleAdmin))
+                        @if (User.Identity.IsAuthenticated)
                         {
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    Management
-                                </a>
-                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <li><a class="dropdown-item" asp-controller="Task" asp-action="TaskDashboard">Task Dashboard</a></li>
-                                    <li><a class="dropdown-item" asp-controller="User" asp-action="UserDashboard">User Dashboard</a></li>
-                                    <li><hr class="dropdown-divider"></li>
-                                </ul>
+                            @if (User.IsInRole(StaticData.RoleAdmin))
+                            {
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        Management
+                                    </a>
+                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <li><a class="dropdown-item" asp-controller="Task" asp-action="TaskDashboard">Task Dashboard</a></li>
+                                        <li><a class="dropdown-item" asp-controller="User" asp-action="UserDashboard">User Dashboard</a></li>
+                                        <li><hr class="dropdown-divider"></li>
+                                    </ul>
+                                </li>
+                            }
+                            else
+                            {
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        Management
+                                    </a>
+                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <li><a class="dropdown-item" asp-controller="Task" asp-action="GetTaskByUserId" asp-route-userId="@Accessor.HttpContext?.User.Claims.First(c => c.Type == "sub").Value">Task Dashboard</a></li>
+                                        @*<li><a class="dropdown-item" asp-controller="User" asp-action="UserDashboard">My Dashboard</a></li>*@
+                                    </ul>
+                                </li>
+
+                            }
+                            <li class="nav-item">
+                                <a class="nav-link text-dark end-0"  asp-area="" asp-controller="Auth" asp-action="Logout">Logout</a>
                             </li>
                         }
                         else
                         {
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    Management
-                                </a>
-                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <li><a class="dropdown-item" asp-controller="Task" asp-action="GetTaskByUserId" asp-route-userId="@Accessor.HttpContext?.User.Claims.First(c => c.Type == "sub").Value">Task Dashboard</a></li>
-                                    @*<li><a class="dropdown-item" asp-controller="User" asp-action="UserDashboard">My Dashboard</a></li>*@
-                                </ul>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark end-0" asp-area="" asp-controller="Auth" asp-action="Register">Register</a>
                             </li>
-
+                            
                         }
                     </ul>
                 </div>

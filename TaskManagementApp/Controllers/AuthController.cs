@@ -47,7 +47,7 @@ namespace TaskManagementApp.Controllers
             var result = await _authenticationService.Registration(register);
             if (string.IsNullOrEmpty(result))
             {
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Login", "Auth");
             }
             TempData["error"]=result;
             return View(register);
