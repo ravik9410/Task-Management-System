@@ -41,6 +41,7 @@ namespace TaskManagementApp.Controllers
            // ViewBag.RoleList = "";
             return View();
         }
+
         [HttpPost]
         public async Task<IActionResult> Register(RegisterationRequestDto register)
         {
