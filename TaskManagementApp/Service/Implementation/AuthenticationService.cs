@@ -59,7 +59,7 @@ namespace TaskManagementApp.Service.Implementation
                 Data = register
             });
             if (result!.IsSuccess)
-            {
+        {
                 var results = await _baseService.SendAsync(new()
                 {
                     ApiType = ApiType.POST,
@@ -72,7 +72,7 @@ namespace TaskManagementApp.Service.Implementation
 
                     return result.Result?.ToString()?.Trim()!;
 
-                }
+        }
                 else
                 {
                     return result.Message!;
@@ -95,7 +95,7 @@ namespace TaskManagementApp.Service.Implementation
                 var tokenReader = new JwtSecurityTokenHandler();
                 var jwt = tokenReader.ReadJwtToken(token);
                 if (jwt != null)
-                {
+        {
                     var identity = new ClaimsIdentity(CookieAuthenticationDefaults.AuthenticationScheme);
                     identity.AddClaim(new Claim(ClaimTypes.Email, jwt.Claims.FirstOrDefault(m => m.Type == JwtRegisteredClaimNames.Email)!.Value));
                     identity.AddClaim(new Claim(ClaimTypes.Role, jwt.Claims.FirstOrDefault(m => m.Type == "role")!.Value));

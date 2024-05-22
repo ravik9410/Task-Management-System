@@ -15,10 +15,10 @@ namespace NotificationServices.Utility
         protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
         {
             if (_accessor.HttpContext != null)
-            {
-                var token = await _accessor.HttpContext?.GetTokenAsync("access_token");
+        {
+            var token = await _accessor.HttpContext?.GetTokenAsync("access_token");
                 //SD.token = token;
-                request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
 
             }
             return await base.SendAsync(request, cancellationToken);

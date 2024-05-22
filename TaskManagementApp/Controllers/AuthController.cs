@@ -33,7 +33,7 @@ namespace TaskManagementApp.Controllers
         public IActionResult Register()
         {
             var roleList = new List<SelectListItem>()
-            {
+        {
                 new (){Text=StaticData.RoleAdmin,Value=StaticData.RoleAdmin},
                 new (){Text=StaticData.RoleCustomer,Value=StaticData.RoleCustomer},
             };

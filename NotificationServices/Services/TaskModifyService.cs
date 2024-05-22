@@ -57,10 +57,10 @@ namespace NotificationServices.Services
             {
                 var res = JsonConvert.DeserializeObject<JObject>(result.Result.ToString());
                 return res["Email"].ToString();
-                //   return true;
+             //   return true;
             }
             return string.Empty;
-            // return false;
+           // return false;
         }
     }
 }

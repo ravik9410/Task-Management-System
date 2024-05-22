@@ -8,12 +8,12 @@ using TaskManagementApp.Utility;
 namespace TaskManagementApp.Controllers
 {
 	[Authorize]
-	public class TaskController : Controller
-	{
+    public class TaskController : Controller
+    {
 		private readonly ITaskManagement _taskManagement;
 
 		public TaskController(ITaskManagement taskManagement)
-		{
+        {
 			_taskManagement = taskManagement;
 		}
 
@@ -41,8 +41,8 @@ namespace TaskManagementApp.Controllers
 				roleList.Add(new() { Text = user.Name, Value = user.UserId });
 			}
 			ViewBag.UserList = roleList;
-			return View();
-		}
+            return View();
+        }
 		[HttpPost]
 		public async Task<IActionResult> CreateNewTask( UserTaskDto userDto)
 		{
@@ -117,5 +117,5 @@ namespace TaskManagementApp.Controllers
 			TempData["error"] = result;
 			return View(userDto);
 		}
-	}
+    }
 }

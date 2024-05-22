@@ -72,6 +72,7 @@ namespace TaskDashboardServices.Controllers
 				_responseDto.Message = "No Record";
 				return BadRequest(_responseDto); 
             }
+            else { return BadRequest("No record"); }
         }
     }
 }
