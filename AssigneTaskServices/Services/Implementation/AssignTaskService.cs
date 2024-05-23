@@ -29,7 +29,7 @@ namespace AssigneTaskServices.Services.Implementation
                 var task = await _taskServices.GetTaskById(assignedUserTask.TaskId ?? 0);
                 if (task.TaskId > 0)
                 {
-                    var assignTaskDetails = await _appDbContext.AssignedTasks.FirstOrDefaultAsync(m => m.TaskId == task.TaskId && m.UserId == task.UserId);
+                    var assignTaskDetails = await _appDbContext.AssignedTasks.AsNoTracking().FirstOrDefaultAsync(m => m.TaskId == task.TaskId && m.UserId == task.UserId);
                     var assign = _mapper.Map<AssignedUserTask>(assignedUserTask);
                     if (assign.AssignedId == 0 && assignTaskDetails == null)
                     {
@@ -39,6 +39,7 @@ namespace AssigneTaskServices.Services.Implementation
                     }
                     else
                     {
+                        assign.AssignedId = assignTaskDetails.AssignedId;
                         assign.TaskStatus = "Assigned";
                         _appDbContext.Update(assign);
 

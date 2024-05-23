@@ -155,10 +155,11 @@ namespace TaskManagementApp.Service.Implementation
 
         public async Task<string> UpdateTask(UserTaskDto userTaskDto)
         {
+            userTaskDto.TaskAssignedBy = _contextAccessor.HttpContext.User.Claims.FirstOrDefault(m => m.Type == JwtRegisteredClaimNames.Sub).Value;
             var result = await _baseService.SendAsync(new()
             {
-                ApiType = ApiType.PUT,
-                Url = TaskDashboardUrl + "/api/assigntask",
+                ApiType = ApiType.PATCH,
+                Url = TaskDashboardUrl + "/api/task",
                 Data = userTaskDto
             });
             if (result!.IsSuccess)

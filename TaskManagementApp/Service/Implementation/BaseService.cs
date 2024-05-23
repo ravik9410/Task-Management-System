@@ -61,6 +61,12 @@ namespace TaskManagementApp.Service.Implementation
                             httpRequestMessage.Method = HttpMethod.Put;
                             break;
                         }
+                    
+                    case ApiType.PATCH:
+                        {
+                            httpRequestMessage.Method = HttpMethod.Patch;
+                            break;
+                        }
                     default:
                         {
                             httpRequestMessage.Method = HttpMethod.Get;

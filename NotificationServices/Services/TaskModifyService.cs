@@ -36,7 +36,7 @@ namespace NotificationServices.Services
             var result = JsonConvert.DeserializeObject<JObject>(response);
             //  var response = await client.SendAsync(requestMessage);
             // var result = JsonConvert.DeserializeObject<string>(await response.Content.ReadAsStringAsync());
-            if (result["Result"]?.ToString() == "Task saved successfully.")
+            if (result["result"]?.ToString() == "Task saved successfully.")
             {
                 return true;
             }

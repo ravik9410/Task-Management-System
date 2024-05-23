@@ -65,9 +65,12 @@ namespace TaskCreationService.Services.Implementation
             //var data = await _userDetails.GetById(task.UserId);
             if (data!.TaskId != 0)
             {
+
+                data.Title = task.Title ?? data.Title;
+                data.Description = task.Description ?? data.Description;
                 data.TaskStatus = task.TaskStatus;
                 data.TaskAssignedBy = task.TaskAssignedBy;
-                data.UserId=task.UserId;
+                data.UserId = task.UserId;
                 await _appDbContext.SaveChangesAsync();
                 return "Task saved successfully.";
             }
@@ -76,22 +79,22 @@ namespace TaskCreationService.Services.Implementation
                 return "Task not exist.";
             }
         }
-        public async Task<string> UpdateTask(UserTaskDto task)
-        {
-            var data = await _appDbContext.UserTasks.FirstOrDefaultAsync(m => m.TaskId == task.TaskId);
-            //var data = await _userDetails.GetById(task.UserId);
-            if (data!.TaskId != 0)
-            {
-                data.TaskStatus = task.TaskStatus;
-                data.TaskAssignedBy = task.TaskAssignedBy;
-                await _appDbContext.SaveChangesAsync();
-                return "Task saved successfully.";
-            }
-            else
-            {
-                return "Task not exist.";
-            }
-        }
+        /* public async Task<string> UpdateTask(UserTaskDto task)
+         {
+             var data = await _appDbContext.UserTasks.FirstOrDefaultAsync(m => m.TaskId == task.TaskId);
+             //var data = await _userDetails.GetById(task.UserId);
+             if (data!.TaskId != 0)
+             {
+                 data.TaskStatus = task.TaskStatus;
+                 data.TaskAssignedBy = task.TaskAssignedBy;
+                 await _appDbContext.SaveChangesAsync();
+                 return "Task saved successfully.";
+             }
+             else
+             {
+                 return "Task not exist.";
+             }
+         }*/
 
         public async Task<List<UserTaskDto>> GetTask()
         {
