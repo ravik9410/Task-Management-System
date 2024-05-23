@@ -4,7 +4,7 @@
     {
         public enum ApiType
         {
-            GET, PUT, POST, DELETE
+            GET, PUT, POST, DELETE,PATCH
         }
         public static string AuthUrl = string.Empty;
         public static string TaskDashboardUrl = string.Empty;
