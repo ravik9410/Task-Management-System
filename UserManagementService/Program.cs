@@ -33,14 +33,18 @@ app.UseSwaggerUI();
     c.RoutePrefix = String.Empty;
 });*/
 
+if (!app.Environment.IsProduction())
+{
+    // Don't use HTTPS redirection in non-production environments
+    app.UseHttpsRedirection();
+}
 
-
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection();
 app.UseAuthentication();
 
 app.UseAuthorization();
 app.MapControllers();
-//ApplyMigration();
+ApplyMigration();
 app.Run();
 
 void ApplyMigration()
