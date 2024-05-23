@@ -1,0 +1,14 @@
+﻿apiVersion: v1
+kind: Service
+metadata:
+  name: usermanage-app-service
+  labels:
+    app: usermanage-app
+spec:
+  type: NodePort
+  ports:
+  - port: 80
+    targetPort: 80
+    nodePort: 31000
+  selector:
+    app: usermanage-app

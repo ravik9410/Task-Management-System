@@ -19,11 +19,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AssigneTaskServices", "Assi
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NotificationServices", "NotificationServices\NotificationServices.csproj", "{AF4561AE-D615-4C4B-A979-DA44B9711D7F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskDashboardServices", "TaskDashboardServices\TaskDashboardServices.csproj", "{5C80A555-9BE1-44B7-ACD1-BD788FB57A8D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TaskDashboardServices", "TaskDashboardServices\TaskDashboardServices.csproj", "{5C80A555-9BE1-44B7-ACD1-BD788FB57A8D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskAPIGateWay", "TaskAPIGateWay\TaskAPIGateWay.csproj", "{02543716-C171-4FE2-94D3-D524B4AEFD12}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TaskAPIGateWay", "TaskAPIGateWay\TaskAPIGateWay.csproj", "{02543716-C171-4FE2-94D3-D524B4AEFD12}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskManagementApp", "TaskManagementApp\TaskManagementApp.csproj", "{78D536BD-9B96-4D5D-B5C1-66A45F5B5511}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{14A37E6A-C7A4-4C5C-93CF-17FAA3ADA72B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -59,6 +61,10 @@ Global
 		{78D536BD-9B96-4D5D-B5C1-66A45F5B5511}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{78D536BD-9B96-4D5D-B5C1-66A45F5B5511}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{78D536BD-9B96-4D5D-B5C1-66A45F5B5511}.Release|Any CPU.Build.0 = Release|Any CPU
+		{14A37E6A-C7A4-4C5C-93CF-17FAA3ADA72B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{14A37E6A-C7A4-4C5C-93CF-17FAA3ADA72B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{14A37E6A-C7A4-4C5C-93CF-17FAA3ADA72B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{14A37E6A-C7A4-4C5C-93CF-17FAA3ADA72B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
