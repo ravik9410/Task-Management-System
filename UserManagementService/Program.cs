@@ -36,7 +36,7 @@ app.UseSwaggerUI();
 if (!app.Environment.IsProduction())
 {
     // Don't use HTTPS redirection in non-production environments
-    app.UseHttpsRedirection();
+    //app.UseHttpsRedirection();
 }
 
 //app.UseHttpsRedirection();
