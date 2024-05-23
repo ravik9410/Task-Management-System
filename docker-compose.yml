@@ -5,13 +5,12 @@ services:
     image: mcr.microsoft.com/mssql/server:2019-latest
     container_name: sqlserver
     environment:
-      - SA_PASSWORD=YourStrongPassword
+      - SA_PASSWORD=YourStrongPassword@1_2@3!4#5Ravi
       - ACCEPT_EULA=Y
     ports:
       - "1433:1433"
     volumes:
       - sqlserverdata:/var/opt/mssql
-      - ./init-db:/docker-entrypoint-initdb.d
 
   usermanagementservice:
     image: ravik9410/usermanagementservices
@@ -21,8 +20,9 @@ services:
     ports:
       - "8080:80"
     environment:
-      - ConnectionStrings__DefaultConnection=Server=sqlserver;Database=UserManagement_ServicesDb;User Id=sa;Password=YourStrongPassword;
+      - ConnectionStrings__DefaultConnection=Server=sqlserver;Database=UserManagement_ServicesDb;User Id=sa;Password=YourStrongPassword@1_2@3!4#5Ravi;
     restart: always
 
 volumes:
   sqlserverdata:
+
