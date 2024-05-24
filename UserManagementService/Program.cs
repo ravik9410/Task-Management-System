@@ -37,11 +37,10 @@ builder.Services.AddDataProtection()
     c.RoutePrefix = String.Empty;
 });*/
 
-if (!app.Environment.IsProduction())
-{
-    // Don't use HTTPS redirection in non-production environments
-    //app.UseHttpsRedirection();
-}
+
+// Don't use HTTPS redirection in non-production environments
+app.UseHttpsRedirection();
+
 
 //app.UseHttpsRedirection();
 app.UseAuthentication();

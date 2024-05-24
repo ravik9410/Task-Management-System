@@ -19,7 +19,8 @@ services:
     depends_on:
       - sqlserver
     ports:
-      - "8080:80"
+      - "7226:7226"
+      - "5006:5006"
     environment:
       - ConnectionStrings__DefaultConnection=Server=sqlserver;Database=UserManagement_ServicesDb;User Id=sa;Password=YourStrongPassword123!;
     restart: always
