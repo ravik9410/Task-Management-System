@@ -26,7 +26,7 @@ services:
     depends_on:
       - sqlserver_usermanage
     ports:
-      - "7226:80" 
+      - "7996:80" 
     build:
       context: .
       dockerfile: UserManagementService/Dockerfile 
