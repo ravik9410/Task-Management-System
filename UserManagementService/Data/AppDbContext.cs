@@ -11,9 +11,9 @@ namespace UserManagementService.Data
 
         }
         public DbSet<ApplicationUser> ApplicationUsers { get; set; }
-       /* protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            base.OnModelCreating(modelBuilder);            
+        /*protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {           
+            base.OnModelCreating(modelBuilder);
         }*/
     }
 }
