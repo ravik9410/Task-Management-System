@@ -9,24 +9,24 @@ services:
   sqlserver_usermanage:
     image: mcr.microsoft.com/mssql/server:2019-latest
     container_name: sqlserver_user_manage
+    ports:
+      - 8051:1433   
     environment:
       - SA_PASSWORD=TaskManage@123456!
-      - ACCEPT_EULA=Y
-    ports:
-      - "8051:1433"   
+      - ACCEPT_EULA=Y   
     networks:
       - taskappnetwork 
 
   usermanagementservice:
     image: ravik9410/usermanagementservices
-    container_name: usermanagementservice
-    depends_on:
-      - sqlserver_usermanage
-    ports:
-      - "7996:80" 
+    container_name: usermanagementservice-app    
     build:
       context: .
       dockerfile: UserManagementService/Dockerfile 
+    depends_on:
+      - sqlserver_usermanage
+    ports:
+      - 7996:80 
     environment:
        - DB_HOST=sqlserver_usermanage
        - DB_NAME=UserManagement_ServicesDb
@@ -34,4 +34,4 @@ services:
     networks:
       - taskappnetwork 
     restart: always
-
+    
