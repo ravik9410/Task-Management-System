@@ -13,10 +13,7 @@ services:
       - SA_PASSWORD=TaskManage@123456!
       - ACCEPT_EULA=Y
     ports:
-      - "8051:1433"
-    volumes:
-      - sqlserverdata:/var/opt/mssql
-      - ./init-db:/docker-entrypoint-initdb.d
+      - "8051:1433"   
     networks:
       - taskappnetwork 
 
@@ -38,5 +35,3 @@ services:
       - taskappnetwork 
     restart: always
 
-volumes:
-  sqlserverdata:

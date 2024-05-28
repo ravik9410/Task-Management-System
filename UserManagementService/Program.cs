@@ -26,9 +26,9 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddAuthorization();
 builder.AddJwtAuthenticationServices();
-builder.Services.AddDataProtection()
-    .PersistKeysToFileSystem(new DirectoryInfo(@"/keys"))
-    .SetApplicationName("UserManagementService");
+//builder.Services.AddDataProtection()
+//    .PersistKeysToFileSystem(new DirectoryInfo(@"/keys"))
+//    .SetApplicationName("UserManagementService");
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -36,12 +36,12 @@ var app = builder.Build();
 app.UseSwagger();
 app.UseSwaggerUI();
 
-/*app.UseSwaggerUI(c =>
+app.UseSwaggerUI(c =>
 {
     c.SwaggerEndpoint("/swagger/v1/swagger.json", "User Management Services");
     c.InjectStylesheet("/swagger/custom.css");
     c.RoutePrefix = String.Empty;
-});*/
+});
 
 
 // Don't use HTTPS redirection in non-production environments
