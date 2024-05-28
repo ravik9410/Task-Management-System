@@ -6,7 +6,7 @@ using UserManagementService.Services.Contract;
 
 namespace UserManagementService.Controllers
 {
-    //[Authorize]
+    [Authorize]
     [Route("api/usermanagement")]
     [ApiController]
     public class UserManageController : ControllerBase

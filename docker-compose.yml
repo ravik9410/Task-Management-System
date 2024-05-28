@@ -6,6 +6,7 @@ networks:
 
 
 services:
+#database
   sqlserver_usermanage:
     image: mcr.microsoft.com/mssql/server:2019-latest
     container_name: sqlserver_user_manage
@@ -16,7 +17,7 @@ services:
       - ACCEPT_EULA=Y   
     networks:
       - taskappnetwork 
-
+      # services ====
   usermanagementservice:
     image: ravik9410/usermanagementservices
     container_name: usermanagementservice-app    
@@ -31,6 +32,112 @@ services:
        - DB_HOST=sqlserver_usermanage
        - DB_NAME=UserManagement_ServicesDb
        - DB_SA_PASSWORD=TaskManage@123456!
+    networks:
+      - taskappnetwork 
+    restart: always 
+
+  taskassignservice:
+    image: ravik9410/taskassignservices
+    container_name: taskassignservice-app    
+    build:
+      context: .
+      dockerfile: AssigneTaskServices/Dockerfile 
+    depends_on:
+      - sqlserver_usermanage
+    ports:
+      - 7998:80    
+    environment:
+       - DB_HOST=sqlserver_usermanage
+       - DB_NAME=TaskAssigned_ServicesDb
+       - DB_SA_PASSWORD=TaskManage@123456!
+    networks:
+      - taskappnetwork 
+    restart: always
+
+  taskcreateservice:
+    image: ravik9410/taskcreateservices
+    container_name: taskcreateservice-app    
+    build:
+      context: .
+      dockerfile: TaskCreationService/Dockerfile 
+    depends_on:
+      - sqlserver_usermanage
+    ports:
+      - 7998:80    
+    environment:
+       - DB_HOST=sqlserver_usermanage
+       - DB_NAME=TaskCreation_ServicesDb
+       - DB_SA_PASSWORD=TaskManage@123456!
+    networks:
+      - taskappnetwork 
+    restart: always
+  
+
+
+  tasknotificationervice:
+    image: ravik9410/tasknotificationervices
+    container_name: tasknotificationervice-app    
+    build:
+      context: .
+      dockerfile: NotificationServices/Dockerfile 
+    depends_on:
+      - sqlserver_usermanage
+    ports:
+      - 7998:80    
+    environment:
+       - DB_HOST=sqlserver_usermanage
+       - DB_NAME=TaskCreation_ServicesDb
+       - DB_SA_PASSWORD=TaskManage@123456!
+    networks:
+      - taskappnetwork 
+    restart: always 
+   
+
+  taskapigatewayservice:
+    image: ravik9410/taskapigatewayservices
+    container_name: taskapigatewayservice-app    
+    build:
+      context: .
+      dockerfile: TaskAPIGateWay/Dockerfile 
+    depends_on:
+      - sqlserver_usermanage
+    ports:
+      - 8001:80    
+    environment:
+       - DB_HOST=sqlserver_usermanage       
+       - DB_SA_PASSWORD=TaskManage@123456!
+    networks:
+      - taskappnetwork 
+    restart: always 
+ 
+  frontendservice:
+    image: ravik9410/taskapigatewayservices
+    container_name: taskapigatewayservice-app    
+    build:
+      context: .
+      dockerfile: TaskAPIGateWay/Dockerfile 
+    depends_on:
+      - sqlserver_usermanage
+    ports:
+      - 8001:80    
+    environment:
+       - DB_HOST=sqlserver_usermanage       
+       - DB_SA_PASSWORD=TaskManage@123456!
+    networks:
+      - taskappnetwork 
+    restart: always 
+
+
+  taskdashboardservice:
+    image: ravik9410/taskdashboardservices
+    container_name: taskdashboardservice-app    
+    build:
+      context: .
+      dockerfile: TaskDashboardServices/Dockerfile 
+    depends_on:
+      - sqlserver_usermanage
+    ports:
+      - 7997:80    
     networks:
       - taskappnetwork 
     restart: always

@@ -14,9 +14,14 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 IMapper mapper = MappingConfig.RegisterConfig().CreateMapper();
 builder.Services.AddSingleton(mapper);
+var dbHost = Environment.GetEnvironmentVariable("DB_HOST");
+var dbName = Environment.GetEnvironmentVariable("DB_NAME");
+var dbPassword = Environment.GetEnvironmentVariable("DB_SA_PASSWORD");
+var connectionString = $"Data Source={dbHost};Initial Catalog={dbName};User ID=sa;Password={dbPassword}";
 builder.Services.AddDbContext<AppDbContext>(options =>
 {
-    options.UseSqlServer(builder.Configuration.GetConnectionString("TaskCreateConnectons"));
+    //options.UseSqlServer(builder.Configuration.GetConnectionString("TaskCreateConnectons"));
+    options.UseSqlServer(connectionString);
 });
 builder.Services.AddScoped<BackendApiAuthenticationHttpClientHandler>();
 builder.Services.AddSwaggerGen();
