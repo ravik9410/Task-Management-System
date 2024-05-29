@@ -1,8 +1,6 @@
-version: '3.8'
-
-
 networks:
   taskappnetwork:
+  taskfronendnetwork:
 
 
 services:
@@ -27,13 +25,14 @@ services:
     depends_on:
       - sqlserver_usermanage
     ports:
-      - 7996:80 
+      - 7990:80 
     environment:
        - DB_HOST=sqlserver_usermanage
        - DB_NAME=UserManagement_ServicesDb
        - DB_SA_PASSWORD=TaskManage@123456!
     networks:
       - taskappnetwork 
+      - taskfronendnetwork
     restart: always 
 
   taskassignservice:
@@ -45,7 +44,7 @@ services:
     depends_on:
       - sqlserver_usermanage
     ports:
-      - 7998:80    
+      - 7991:80    
     environment:
        - DB_HOST=sqlserver_usermanage
        - DB_NAME=TaskAssigned_ServicesDb
@@ -63,7 +62,7 @@ services:
     depends_on:
       - sqlserver_usermanage
     ports:
-      - 7998:80    
+      - 7992:80    
     environment:
        - DB_HOST=sqlserver_usermanage
        - DB_NAME=TaskCreation_ServicesDb
@@ -83,7 +82,7 @@ services:
     depends_on:
       - sqlserver_usermanage
     ports:
-      - 7998:80    
+      - 7993:80    
     environment:
        - DB_HOST=sqlserver_usermanage
        - DB_NAME=TaskCreation_ServicesDb
@@ -102,7 +101,7 @@ services:
     depends_on:
       - sqlserver_usermanage
     ports:
-      - 8001:80    
+      - 7996:80    
     environment:
        - DB_HOST=sqlserver_usermanage       
        - DB_SA_PASSWORD=TaskManage@123456!
@@ -111,20 +110,22 @@ services:
     restart: always 
  
   frontendservice:
-    image: ravik9410/taskapigatewayservices
-    container_name: taskapigatewayservice-app    
+    image: ravik9410/frontendservices
+    container_name: frontendservice-app    
     build:
       context: .
-      dockerfile: TaskAPIGateWay/Dockerfile 
+      dockerfile: TaskManagementApp/Dockerfile 
     depends_on:
-      - sqlserver_usermanage
+      - taskapigatewayservice
+      - usermanagementservice
     ports:
-      - 8001:80    
+      - 7994:80    
     environment:
        - DB_HOST=sqlserver_usermanage       
        - DB_SA_PASSWORD=TaskManage@123456!
     networks:
       - taskappnetwork 
+      - taskfronendnetwork
     restart: always 
 
 
@@ -137,7 +138,7 @@ services:
     depends_on:
       - sqlserver_usermanage
     ports:
-      - 7997:80    
+      - 7995:80    
     networks:
       - taskappnetwork 
     restart: always
