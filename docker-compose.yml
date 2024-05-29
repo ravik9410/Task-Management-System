@@ -53,8 +53,7 @@ services:
        - DB_HOST=sqlserver_usermanage
        - DB_NAME=TaskAssigned_ServicesDb
        - DB_SA_PASSWORD=TaskManage@123456!
-    networks:
-      - taskappnetwork 
+    networks:       
       - assingtasknetwork 
     restart: always
 
@@ -72,8 +71,7 @@ services:
        - DB_HOST=sqlserver_usermanage
        - DB_NAME=TaskCreation_ServicesDb
        - DB_SA_PASSWORD=TaskManage@123456!
-    networks:
-      - taskappnetwork 
+    networks:       
       - createtasknetwork
     restart: always
   
