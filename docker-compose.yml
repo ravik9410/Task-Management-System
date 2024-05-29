@@ -1,6 +1,9 @@
 networks:
   taskappnetwork:
   taskfronendnetwork:
+  taskdashboardnetwork:
+  createtasknetwork:
+  assingtasknetwork:
 
 
 services:
@@ -33,6 +36,7 @@ services:
     networks:
       - taskappnetwork 
       - taskfronendnetwork
+      - taskdashboardnetwork
     restart: always 
 
   taskassignservice:
@@ -51,6 +55,7 @@ services:
        - DB_SA_PASSWORD=TaskManage@123456!
     networks:
       - taskappnetwork 
+      - assingtasknetwork 
     restart: always
 
   taskcreateservice:
@@ -69,6 +74,7 @@ services:
        - DB_SA_PASSWORD=TaskManage@123456!
     networks:
       - taskappnetwork 
+      - createtasknetwork
     restart: always
   
 
@@ -89,6 +95,7 @@ services:
        - DB_SA_PASSWORD=TaskManage@123456!
     networks:
       - taskappnetwork 
+      - assingtasknetwork
     restart: always 
    
 
@@ -137,9 +144,13 @@ services:
       dockerfile: TaskDashboardServices/Dockerfile 
     depends_on:
       - sqlserver_usermanage
+      - taskassignservice
+      - taskcreateservice
     ports:
       - 7995:80    
-    networks:
-      - taskappnetwork 
+    networks:      
+      - taskdashboardnetwork
+      - assingtasknetwork
+      - createtasknetwork
     restart: always
     

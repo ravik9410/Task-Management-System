@@ -21,11 +21,15 @@ builder.AddJwtAuthenticationServices();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+
+app.UseSwagger();
+app.UseSwaggerUI(c =>
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+    c.SwaggerEndpoint("/swagger/v1/swagger.json", "Task Dashboard Services");
+    c.InjectStylesheet("/swagger/custom.css");
+    c.RoutePrefix = String.Empty;
+});
+
 
 app.UseHttpsRedirection();
 app.UseAuthentication();
